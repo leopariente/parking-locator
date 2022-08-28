@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  MapContainer,
-  TileLayer,
-} from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 import ParkingMarker from "./components/ParkingMarker";
 import ListOfMarkers from "./components/ListOfMarkers";
@@ -10,7 +7,7 @@ import CurrentLocation from "./components/CurrentLocation";
 
 const Map: React.FC = () => {
   const position: LatLngExpression = [32.0853, 34.7818];
-
+  
   return (
     <MapContainer zoom={14} center={position}>
       <TileLayer

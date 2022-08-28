@@ -4,11 +4,13 @@ import { Marker, Popup, useMapEvents } from "react-leaflet";
 const ParkingMarker: React.FC = () => {
   const [carModel, setCarModel] = useState("");
   const [carColor, setCarColor] = useState("");
+  const [minutesToLeave, setMinutesToLeave] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [position, setPosition] = useState(null) as any;
 
   const postParking = async () => {
-    const response = await fetch("http://localhost:4000/park", {
+    await fetch("http://localhost:4000/park", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -19,17 +21,12 @@ const ParkingMarker: React.FC = () => {
         lon: position.lng,
         carModel: carModel,
         carColor: carColor,
+        minutesToLeave: Number(minutesToLeave),
         licensePlate: licensePlate,
         phoneNumber: phoneNumber,
       }),
     });
-
-    response.json().then((data) => {
-      console.log(data);
-    });
   };
-
-  const [position, setPosition] = useState(null) as any;
 
   const map = useMapEvents({
     click(e) {
@@ -49,7 +46,8 @@ const ParkingMarker: React.FC = () => {
           value={carModel}
           placeholder="Enter car model"
           onChange={(e) => setCarModel(e.target.value)}
-        />
+        />{" "}
+        <br />
         <label htmlFor="carColor">Car Color:</label>
         <input
           type="text"
@@ -57,7 +55,17 @@ const ParkingMarker: React.FC = () => {
           value={carColor}
           placeholder="Enter car color"
           onChange={(e) => setCarColor(e.target.value)}
-        />
+        />{" "}
+        <br />
+        <label htmlFor="minutesToLeave">Minutes To Leave:</label>
+        <input
+          type="text"
+          name="minutesToLeave"
+          value={minutesToLeave}
+          placeholder="Enter minutes to leave"
+          onChange={(e) => setMinutesToLeave(e.target.value)}
+        />{" "}
+        <br />
         <label htmlFor="licensePlate">License Plate &#40;optional&#41;:</label>
         <input
           type="text"
@@ -65,7 +73,8 @@ const ParkingMarker: React.FC = () => {
           value={licensePlate}
           placeholder="Enter license plate"
           onChange={(e) => setLicensePlate(e.target.value)}
-        />
+        />{" "}
+        <br />
         <label htmlFor="phoneNumber">Phone Number &#40;optional&#41;:</label>
         <input
           type="text"
