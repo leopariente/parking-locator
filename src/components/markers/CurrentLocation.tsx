@@ -1,7 +1,6 @@
-import { icon } from 'leaflet';
+import { locationIcon } from '../../icons/currentLocation'; 
 import { useState, useEffect } from 'react';
 import { Marker, Popup, useMap } from "react-leaflet";
-// import L, { Icon, latLng } from 'leaflet'
 
 function CurrentLocation() {
   const [position, setPosition] = useState(null) as any;
@@ -11,7 +10,6 @@ function CurrentLocation() {
 
   useEffect(() => {
     map.locate().on("locationfound", function (e) {
-      console.log(e);
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
       const radius = e.accuracy;
@@ -22,7 +20,7 @@ function CurrentLocation() {
   }, [map]);
 
   return position === null ? null : (
-    <Marker position={position}>
+    <Marker position={position} icon={locationIcon}>
       <Popup>
         You are here. <br />
         Map bbox: <br />

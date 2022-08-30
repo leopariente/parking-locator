@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import { LatLng } from "leaflet";
+import React, { useState, useRef, useEffect } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
 
-const ParkingMarker: React.FC = () => {
+const ParkingMarker = (props: any) => {
   const [carModel, setCarModel] = useState("");
   const [carColor, setCarColor] = useState("");
   const [minutesToLeave, setMinutesToLeave] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [position, setPosition] = useState(null) as any;
+  const [position, setPosition] = useState({ lat: 0, lng: 0 } as LatLng);
+
+  const marker = useRef(null) as any;
+  const didMount = useRef(0);
 
   const postParking = async () => {
     await fetch("http://localhost:4000/park", {
@@ -26,17 +30,25 @@ const ParkingMarker: React.FC = () => {
         phoneNumber: phoneNumber,
       }),
     });
+    props.getAllLocations()
   };
 
   const map = useMapEvents({
     click(e) {
       setPosition(e.latlng);
-      console.log(position);
     },
   });
 
+  useEffect(() => {
+    if (didMount.current === 2) {
+      marker.current.openPopup();
+    } else {
+      didMount.current++;
+    }
+  }, [position]);
+
   return position === null ? null : (
-    <Marker position={position}>
+    <Marker position={position} ref={marker}>
       <Popup>
         Do you want to add a new parking spot here? <br />
         <label htmlFor="carModel">Car Model:</label>
