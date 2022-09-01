@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../../context/auth-context"; 
+import "./LoginForm.scss"
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLoginMode, setIsLoginMode] = useState(true);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   const submitHandler = async (username: string, password: string) => {
     let route = "";
-    if (isLogin) {
+    if (isLoginMode) {
       route = "login";
     } else {
       route = "signup";
@@ -24,15 +30,18 @@ const LoginForm = () => {
       }),
     });
     const data = await response.json();
-    if(data.token) {
-      console.log(data);
+    if (data.token) {
+      auth.login(data.username, data.token);
+      navigate("/");
+    } else {
+      setError(data.response);
     }
   };
 
   return (
-    <div>
-      <h1>Hello!</h1>
-      <h3>{isLogin ? "Login!" : "Sign up!"}</h3>
+    <div className="form">
+      <h2>Thank you for sharing where you park!</h2>
+      <h3>{isLoginMode ? "Login!" : "Sign up!"}</h3>
       <input
         type="text"
         placeholder="Enter username"
@@ -44,11 +53,12 @@ const LoginForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={() => submitHandler(username, password)}>
-        {isLogin ? "Login!" : "Create account!"}
+        {isLoginMode ? "Login!" : "Create account!"}
       </button>
-      <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? "Dont have an account? Sign up" : "Have an account? Sign in"}
-      </button>
+      <Link to={"/login"} onClick={() => setIsLoginMode(!isLoginMode)}>
+        {isLoginMode ? "Dont have an account? Sign up" : "Have an account? Sign in"}
+      </Link>
+      <p>{error}</p>
     </div>
   );
 };

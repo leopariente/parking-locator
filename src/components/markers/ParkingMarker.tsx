@@ -1,6 +1,7 @@
 import { LatLng } from "leaflet";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Marker, Popup, useMapEvents } from "react-leaflet";
+import { AuthContext } from "../../context/auth-context";
 
 const ParkingMarker = (props: any) => {
   const [carModel, setCarModel] = useState("");
@@ -9,6 +10,7 @@ const ParkingMarker = (props: any) => {
   const [licensePlate, setLicensePlate] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [position, setPosition] = useState({ lat: 0, lng: 0 } as LatLng);
+  const auth = useContext(AuthContext);
 
   const marker = useRef(null) as any;
   const didMount = useRef(0);
@@ -19,6 +21,7 @@ const ParkingMarker = (props: any) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${auth.token}`
       },
       body: JSON.stringify({
         lat: position.lat,
@@ -30,7 +33,7 @@ const ParkingMarker = (props: any) => {
         phoneNumber: phoneNumber,
       }),
     });
-    props.getAllLocations()
+    setTimeout(() => props.getAllLocations(), 400)
   };
 
   const map = useMapEvents({
@@ -49,7 +52,8 @@ const ParkingMarker = (props: any) => {
 
   return position === null ? null : (
     <Marker position={position} ref={marker}>
-      <Popup>
+      {auth.isLoggedIn && (
+        <Popup>
         Do you want to add a new parking spot here? <br />
         <label htmlFor="carModel">Car Model:</label>
         <input
@@ -97,6 +101,11 @@ const ParkingMarker = (props: any) => {
         />
         <button onClick={postParking}>Confirm</button>
       </Popup>
+      )} {!auth.isLoggedIn && (
+        <Popup>
+          <p>Please log in to upload a parking spot!</p>
+        </Popup>
+      )}
     </Marker>
   );
 };

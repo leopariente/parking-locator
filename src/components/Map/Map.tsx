@@ -11,7 +11,13 @@ const Map: React.FC = () => {
   const [parkings, setParkings] = useState([]);
 
   const getAllLocations = async () => {
-    const response = await fetch("http://localhost:4000/park");
+    const token = localStorage.getItem("token");
+    const response = await fetch("http://localhost:4000/park", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }})
     const list = await response.json();
     setParkings(list);
   };
