@@ -32,9 +32,13 @@ const LoginForm = () => {
     const data = await response.json();
     if (data.token) {
       auth.login(data.username, data.token);
-      navigate("/");
+      if(route === "login") {
+        navigate("/");
+      } else {
+        navigate("/preferences");
+      }
     } else {
-      setError(data.response);
+      setError(data.error);
     }
   };
 
@@ -55,10 +59,10 @@ const LoginForm = () => {
       <button onClick={() => submitHandler(username, password)}>
         {isLoginMode ? "Login!" : "Create account!"}
       </button>
+      <h3>{error}</h3>
       <Link to={"/login"} onClick={() => setIsLoginMode(!isLoginMode)}>
         {isLoginMode ? "Dont have an account? Sign up" : "Have an account? Sign in"}
       </Link>
-      <p>{error}</p>
     </div>
   );
 };

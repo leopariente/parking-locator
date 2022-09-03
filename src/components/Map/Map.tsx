@@ -4,12 +4,14 @@ import { LatLngExpression } from "leaflet";
 import ParkingMarker from "../markers/ParkingMarker";
 import ListOfMarkers from "../markers/ListOfMarkers";
 import CurrentLocation from "../markers/CurrentLocation";
+import "../../App.css"
 
-
+//main container of map contains all three components of markers
 const Map: React.FC = () => {
   const position: LatLngExpression = [32.0853, 34.7818];
   const [parkings, setParkings] = useState([]);
 
+  //fetches all parkings from database, passes on as props to all the children
   const getAllLocations = async () => {
     const token = localStorage.getItem("token");
     const response = await fetch("http://localhost:4000/park", {
@@ -21,7 +23,7 @@ const Map: React.FC = () => {
     const list = await response.json();
     setParkings(list);
   };
-  
+
   return (
     <MapContainer zoom={14} center={position}>
       <TileLayer

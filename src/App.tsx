@@ -5,6 +5,7 @@ import LoginForm from "./components/LoginForm/LoginForm";
 import NavBar from "./components/Navbar";
 import { AuthContext } from "./context/auth-context";
 import { useAuth } from "./hooks/auth-hook";
+import PreferencesPage from "./components/preferences/PreferencesPage";
 
 function App() {
   const { token, username, login, logout } = useAuth();
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Map />} />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/preferences" element={<PreferencesPage />} />
           </Routes>
         </BrowserRouter>
       </AuthContext.Provider>
