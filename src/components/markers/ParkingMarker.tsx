@@ -69,9 +69,7 @@ const ParkingMarker = (props: any) => {
         Authorization: `Bearer ${auth.token}`,
       },
       body: JSON.stringify({
-        preferences: {
-          preferences,
-        },
+        preferences,
       }),
     });
     setPreferences(preferences);
@@ -100,6 +98,7 @@ const ParkingMarker = (props: any) => {
   }, [position]);
 
   useEffect(() => {
+    console.log("useEffect");
     if (auth.isLoggedIn) {
       fetch("http://localhost:4000/preferences", {
         method: "GET",
@@ -110,6 +109,7 @@ const ParkingMarker = (props: any) => {
         },
       }).then((res) => {
         res.json().then((response) => {
+          console.log(response);
           setPreferences(response);
         });
       });
