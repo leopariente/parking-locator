@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 
 let logoutTimer: any;
 
@@ -15,7 +15,7 @@ export const useAuth = () => {
         expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
       setTokenExpirationDate(tokenExpirationDate);
       localStorage.setItem(
-        "userData",
+        'userData',
         JSON.stringify({
           token: token,
           username: username,
@@ -30,7 +30,7 @@ export const useAuth = () => {
     setToken(null);
     setUsername(null);
     setTokenExpirationDate(null);
-    localStorage.removeItem("userData");
+    localStorage.removeItem('userData');
   }, []);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const useAuth = () => {
   }, [token, tokenExpirationDate, logout]);
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userData") as string);
+    const storedData = JSON.parse(localStorage.getItem('userData') as string);
     if (
       storedData &&
       storedData.token &&
