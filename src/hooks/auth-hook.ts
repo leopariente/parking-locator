@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 let logoutTimer: any;
 
 export const useAuth = () => {
+  // CR: https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-explicit-any.md
   const [token, setToken] = useState(false as any);
   const [tokenExpirationDate, setTokenExpirationDate] = useState(null as any);
   const [username, setUsername] = useState(false as any);

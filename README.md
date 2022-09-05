@@ -17,3 +17,17 @@ When you first enter the app you will see a map with markers on it. Each marker 
 * Phone number (optional)
 
 To upload a parking spot all you need to do is login and click the map where your car is.
+
+## TODO
+* add unit tests where you can
+    * use mocks to mock the server. the project should be able to test itself without the server
+* setup CI/CD code prettifier
+* add .editorconfig file that corresponds your eslint
+* add build into docker
+* add deploy onto aws. the common use case is to use boto3 library (python)
+    * when deploying, add https server proxy (like nginx) in front of your app, then you don't have to deal with certificate negotiation on your own (it will be transparent)
+* add end-to-end tests (if you stick with the splitted projects, you can add another project that tests them together as a whole)
+* add LICENSE file (you can use MIT which is highly permissive)
+* add Contributing section to README.md with instructions how to add code
+* add instructions how to run the tests to README.md
+* update all packages to the latest supported version to avoid having any vulnerabilities because of old revisions of dependencies

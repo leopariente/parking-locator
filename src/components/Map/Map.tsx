@@ -6,6 +6,10 @@ import ListOfMarkers from "../markers/ListOfMarkers";
 import CurrentLocation from "../markers/CurrentLocation";
 import "../../App.css"
 
+// CR: generally speaking, you can follow Airbnb conventions in your code:
+//     https://github.com/airbnb/javascript/tree/master/react
+
+// CR: most people put a space at the beginning of a comment
 //main container of map contains all three components of markers
 const Map: React.FC = () => {
   const position: LatLngExpression = [32.0853, 34.7818];
