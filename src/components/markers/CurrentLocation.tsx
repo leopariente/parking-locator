@@ -1,7 +1,6 @@
-import { locationIcon } from '../../icons/icons'; 
-import { useState, useEffect } from 'react';
+import { locationIcon } from "../../icons/icons";
+import { useState, useEffect, useRef } from "react";
 import { Marker, Popup, useMap } from "react-leaflet";
-
 
 //Location component, on load of map gets location and adds the marker to the map
 function CurrentLocation() {
@@ -18,9 +17,7 @@ function CurrentLocation() {
 
   return position === null ? null : (
     <Marker position={position} icon={locationIcon}>
-      <Popup>
-        You are here. 
-      </Popup>
+      <Popup>You are here.</Popup>
     </Marker>
   );
 }

@@ -2,7 +2,7 @@ import Map from "./components/Map/Map";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import LoginForm from "./components/LoginForm/LoginForm";
-import NavBar from "./components/Navbar";
+import NavBar from "./components/NavBar/NavBar";
 import { AuthContext } from "./context/auth-context";
 import { useAuth } from "./hooks/auth-hook";
 import PreferencesPage from "./components/preferences/PreferencesPage";

@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "../App.css";
-import { AuthContext } from "../context/auth-context";
+import { AuthContext } from "../../context/auth-context";
+import "./NavBar.scss";
 
 const NavBar = () => {
   const auth = useContext(AuthContext);
 
   return (
     <div className="nav-bar">
-      <Link to="/" style={{ color: "white" }}>
+      <Link to="/" style={{ color: "white", marginRight: "10px" }}>
         Map
       </Link>
       {!auth.isLoggedIn && (

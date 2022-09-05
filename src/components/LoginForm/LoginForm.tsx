@@ -13,6 +13,9 @@ const LoginForm = () => {
 
   const submitHandler = async (username: string, password: string) => {
     let route = "";
+    if (username === "" || password === "") {
+      setError("Please fill out all fields!")
+    } else {
     if (isLoginMode) {
       route = "login";
     } else {
@@ -40,6 +43,7 @@ const LoginForm = () => {
     } else {
       setError(data.error);
     }
+  }
   };
 
   return (
@@ -59,9 +63,9 @@ const LoginForm = () => {
       <button onClick={() => submitHandler(username, password)}>
         {isLoginMode ? "Login!" : "Create account!"}
       </button>
-      <h3>{error}</h3>
+      <h3 style={{ textAlign: "center", color: "red" }}>{error}</h3>
       <Link to={"/login"} onClick={() => setIsLoginMode(!isLoginMode)}>
-        {isLoginMode ? "Dont have an account? Sign up" : "Have an account? Sign in"}
+        {isLoginMode ? `Dont have an account? Sign up` : "Have an account? Sign in"}
       </Link>
     </div>
   );

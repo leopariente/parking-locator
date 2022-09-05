@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth-context";
+import "./PreferencesPage.scss";
 
 const PreferencesPage = () => {
   const navigate = useNavigate();
@@ -31,10 +32,10 @@ const PreferencesPage = () => {
   };
 
   return (
-    <div>
-      <h1>For convenience you can save your car settings for future uploads</h1>
+    <div className="preferences-form">
+      <h1>Save your car settings for future uploads!</h1>
       <h3>Don't worry, you can always change it in the future</h3>
-      <h3>You dont have to fill all fields</h3>
+      <h3 className="bottom">You dont have to fill all fields</h3>
       <div>
         <label htmlFor="carModel">Car Model: &#40;optional&#41;</label>
         <input

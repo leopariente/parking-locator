@@ -1,11 +1,17 @@
-.form {
-    margin: 15vh;
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preferences-form {
+    margin: 20vh;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25%;
-    padding: 150px;
+    width: 40%;
+    padding: 50px;
     border: 2px gray solid;
     border-radius: 10px;
 
@@ -33,6 +39,7 @@
         touch-action: manipulation;
         vertical-align: baseline;
         white-space: nowrap;
+        margin-bottom: 10px;
     }
     button:hover,
     button:focus {
@@ -41,7 +48,7 @@
     button:focus {
         box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
     }
-    
+
     button:active {
         background-color: #0064bd;
         box-shadow: none;
@@ -49,15 +56,14 @@
 
     input {
         margin: 10px;
-        width: 80%;
-        padding: 0.2em 0.5em;
+        padding-left: 5px;
         font-size: 14pt;
+        width: 100%;
     }
     h1 {
         text-align: center;
     }
-    h2 {
-        text-align: center;
+    .bottom {
+        margin-bottom: 20px;
     }
 }
-
