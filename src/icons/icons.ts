@@ -1,3 +1,4 @@
+// CR: blue-circle.png and list-parking.png are too big (filesize), reduce them
 import L from 'leaflet';
 
 export const locationIcon = new L.Icon({

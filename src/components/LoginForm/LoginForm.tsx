@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"; // CR: your eslint disallows double quotes. pick one way (single/double quotes) and stick with it
 import { AuthContext } from "../../context/auth-context"; 
 import "./LoginForm.scss"
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(""); // CR: use comments
   const [password, setPassword] = useState("");
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [error, setError] = useState("");
@@ -21,7 +21,9 @@ const LoginForm = () => {
     } else {
       route = "signup";
     }
-    const response = await fetch(`http://localhost:4000/${route}`, {
+    // CR: the fetch code is redundant, reuse it
+    const response = await fetch(`http://localhost:4000/${route}`, { // CR: avoid putting magic strings around the code, especially such URL. use a const.
+    // CR: also use httpS:// instead of http://
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -35,7 +37,7 @@ const LoginForm = () => {
     const data = await response.json();
     if (data.token) {
       auth.login(data.username, data.token);
-      if(route === "login") {
+      if(route === "login") { // CR: this should be an hosted in an enum or other structure, not a string
         navigate("/");
       } else {
         navigate("/preferences");
