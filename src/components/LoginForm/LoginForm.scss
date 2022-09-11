@@ -1,11 +1,12 @@
 .form {
+    position: relative;
     margin: 15vh;
-    position: absolute;
+    margin-top: 12vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25%;
-    padding: 150px;
+    width: 25vw;
+    padding: 10vw;
     border: 2px gray solid;
     border-radius: 10px;
 
@@ -41,7 +42,7 @@
     button:focus {
         box-shadow: 0 0 0 4px rgba(0, 149, 255, 0.15);
     }
-    
+
     button:active {
         background-color: #0064bd;
         box-shadow: none;
@@ -61,3 +62,13 @@
     }
 }
 
+@media screen and (max-width: 650px) {
+    .form {
+        width: 85vw;
+        margin-top: 5vh;
+        border: 0px;
+    }
+    input {
+        margin-bottom: 10vh;
+    }
+}

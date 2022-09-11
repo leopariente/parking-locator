@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Marker, Popup } from "react-leaflet";
-import { AuthContext } from "../../context/auth-context";
-import { myParkingIcon, listParkingIcon } from "../../icons/icons";
-import "./ParkingMarker.scss"
+import React, { useContext, useEffect, useState } from 'react';
+import { Marker, Popup } from 'react-leaflet';
+import { AuthContext } from '../../context/auth-context';
+import { myParkingIcon, listParkingIcon } from '../../icons/icons';
+import './ParkingMarker.scss';
 
-//Gets all parkings and add them to map as markers
+// Gets all parkings and adds them to map as markers
 const ListOfMarkers = (props: any) => {
   const auth = useContext(AuthContext);
   const deleteParking = async (parkingId: string) => {
-    await fetch("http://localhost:4000/park", {
-      method: "DELETE",
+    await fetch('https://parking-locator-server.herokuapp.com/park', {
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${auth.token}`,
       },
       body: JSON.stringify({ id: parkingId }),
@@ -43,10 +43,10 @@ const ListOfMarkers = (props: any) => {
               <p>{parking.phoneNumber}</p>
               <p>Car leaves at: {parking.localTime}</p>
               {auth.isLoggedIn && auth.username === parking.username && (
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                <button onClick={() => deleteParking(parking._id)} className="button">
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <button onClick={() => deleteParking(parking._id)} className="button">
                   Delete
-                </button>
+                  </button>
                 </div>
               )}
             </div>

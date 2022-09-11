@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 let logoutTimer: any;
 
 export const useAuth = () => {
-  const [token, setToken] = useState(false as any);
-  const [tokenExpirationDate, setTokenExpirationDate] = useState(null as any);
-  const [username, setUsername] = useState(false as any);
+  const [token, setToken] = useState<string>('');
+  const [tokenExpirationDate, setTokenExpirationDate] = useState<Date | null>(null);
+  const [username, setUsername] = useState<string>('');
 
   const login = useCallback(
     (username: string, token: string, expirationDate: Date | undefined) => {
@@ -27,14 +27,14 @@ export const useAuth = () => {
   );
 
   const logout = useCallback(() => {
-    setToken(null);
-    setUsername(null);
+    setToken('');
+    setUsername('');
     setTokenExpirationDate(null);
     localStorage.removeItem('userData');
   }, []);
 
   useEffect(() => {
-    const remainingTime = tokenExpirationDate?.getTime() - new Date().getTime();
+    const remainingTime = tokenExpirationDate?.getTime()! - new Date().getTime();
     if (token && tokenExpirationDate) {
       logoutTimer = setTimeout(logout, remainingTime);
     } else {

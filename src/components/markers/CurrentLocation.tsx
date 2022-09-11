@@ -1,15 +1,15 @@
-import { locationIcon } from "../../icons/icons";
-import { useState, useEffect, useRef } from "react";
-import { Marker, Popup, useMap } from "react-leaflet";
+import { locationIcon } from '../../icons/icons';
+import { useState, useEffect, useRef } from 'react';
+import { Marker, Popup, useMap } from 'react-leaflet';
 
-//Location component, on load of map gets location and adds the marker to the map
+// Location component, on load of map gets location and adds the marker to the map
 function CurrentLocation() {
   const [position, setPosition] = useState(null) as any;
 
   const map = useMap();
 
   useEffect(() => {
-    map.locate().on("locationfound", function (e) {
+    map.locate().on('locationfound', function (e) {
       setPosition(e.latlng);
       map.flyTo(e.latlng, map.getZoom());
     });

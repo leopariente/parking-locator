@@ -1,22 +1,23 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/auth-context";
-import "./PreferencesPage.scss";
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/auth-context';
+import './PreferencesPage.scss';
 
+// Preferences page, used to save user preferences
 const PreferencesPage = () => {
   const navigate = useNavigate();
-  const [carModel, setCarModel] = useState("");
-  const [carColor, setCarColor] = useState("");
-  const [licensePlate, setLicensePlate] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [carModel, setCarModel] = useState('');
+  const [carColor, setCarColor] = useState('');
+  const [licensePlate, setLicensePlate] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const auth = useContext(AuthContext);
 
   const setPreferences = async () => {
-    await fetch("http://localhost:4000/preferences", {
-      method: "PUT",
+    await fetch('https://parking-locator-server.herokuapp.com/preferences', {
+      method: 'PUT',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${auth.token}`,
       },
       body: JSON.stringify({
@@ -28,7 +29,7 @@ const PreferencesPage = () => {
         },
       }),
     });
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -74,7 +75,7 @@ const PreferencesPage = () => {
         />
       </div>
       <button onClick={setPreferences}>Save preferences</button>
-      <Link to={"/"}>Skip</Link>
+      <Link to={'/'}>Skip</Link>
     </div>
   );
 };
