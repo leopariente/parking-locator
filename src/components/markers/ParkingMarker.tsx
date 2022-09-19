@@ -110,7 +110,7 @@ const ParkingMarker = (props: any) => {
   }, [auth.isLoggedIn]);
 
   return position === null ? null : (
-    <Marker position={position} ref={marker} icon={myParkingIcon}>
+    <Marker position={position} ref={marker} icon={myParkingIcon} data-testid="marker">
       {auth.isLoggedIn && (
         <Popup>
           <div className="parking-form">
